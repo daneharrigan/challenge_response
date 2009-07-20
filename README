@@ -1,13 +1,7 @@
 ChallengeResponse
 =================
 
-Introduction goes here.
+A challenge response plugin for Rails. This is to be used instead of a Captcha. Questions like "What does 1 + 2 equal?", "What letter comes before W?", "What does 7 - 3 equal?" will be asked and tested.
 
 
-Example
-=======
-
-Example goes here.
-
-
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+Copyright (c) 2009 Dane Harrigan of Six Studios, released under the MIT license
