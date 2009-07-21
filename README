@@ -5,3 +5,34 @@ A challenge response plugin for Rails. This is to be used instead of a Captcha. 
 
 
 Copyright (c) 2009 Dane Harrigan of Six Studios, released under the MIT license
+
+
+Instructions
+=================
+
+1. Add plugin
+
+2. Run "script/generate challenge_response"
+
+3. Review the questions and answers in: vendor/plugins/challenge_response/challenge_questions.yml
+3a. If questions are not acceptable run "script/generate challenge_response redo"
+
+4. Migrate the database, "rake db:migrate"
+
+5. Add the following to the controller that needs the challenge response:
+  before_filter :challenge_response, :for => [:new, :create]
+
+  def create # this code is to be applied to your existing create method
+    if params[:form] and challenge_successful?
+      ...
+    else
+      create_challenge # creates a new challenge question entry
+      ...
+    end
+  end
+
+6. Add the following to the view. The HTML in this example is hypothetical and should be changed to fit the view properly:
+  <div>
+    <p><%= challenge_question %></p>
+    <%= text_field_tag :challenge_answer %>
+  </div>
