@@ -1,9 +1,9 @@
 class Challenge < ActiveRecord::Base
-  validates_presense_of :question
+  validates_presence_of :question
   validates_length_of :question, :in => 10..50
   validates_format_of :question, :with => /\A[\w\d\ \?\+]+\z/
 
-  validates_presense_of :answer
+  validates_presence_of :answer
   validates_length_of :answer, :in => 1..20
   validates_format_of :answer, :with => /\A[\w\d]+\z/
 
