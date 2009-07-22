@@ -7,7 +7,7 @@ def challenge_response
 
   if current_challenge
     @challenge = current_challenge.challenge
-    if params[:challenge_answer] and params[:challenge_answer] == @challenge.answer
+    if params[:challenge_answer] and @challenge.answer? params[:challenge_answer]
       new_challenge = false
       @challenge_successful = true
     end
