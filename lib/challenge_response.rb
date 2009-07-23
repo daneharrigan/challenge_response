@@ -35,3 +35,8 @@ end
 def challenge_successful?
   @challenge_successful
 end
+
+def challenge_answer(options = {})
+  values[:name] = 'challenge_answer'
+  text_field_tag('challenge_answer', nil, options)
+end
