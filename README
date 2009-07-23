@@ -31,8 +31,16 @@ Instructions
     end
   end
 
+The challenge_response method is being processed on the "new" controller method to generate the question.
+It is also running on the "create" controller method to validate the question.
+
+The challenge_successful? method will return a true or false value determining whether or not the response was valid.
+The response may be valid, but other areas of the form were not. In a case like this you see the create_challenge method being used. This will create a new challenge for the user. 
+
 6. Add the following to the view. The HTML in this example is hypothetical and should be changed to fit the view properly:
   <div>
     <p><%= challenge_question %></p>
-    <%= text_field_tag :challenge_answer %>
+    <%= challenge_answer %>
   </div>
+
+7. Play clean up. Use ChallengedSession.sweep("20min") to remove any unused entries. This can happen if a person views the form and leaves without submitting.
