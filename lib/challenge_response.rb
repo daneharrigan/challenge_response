@@ -21,7 +21,8 @@ end
 def create_challenge
   challenged_session = ChallengedSession.new
   challenged_session.session = @challenge_token
-  challenged_session.challenge_id = rand(Challenge.count)+1
+  challenged_session.challenge_id = Challenge.find(:first, :offset => rand(Challenge.count())).id
+
   challenged_session.save!
 
   @challenge = challenged_session.challenge

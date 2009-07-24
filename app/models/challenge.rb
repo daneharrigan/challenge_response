@@ -1,7 +1,7 @@
 class Challenge < ActiveRecord::Base
   validates_presence_of :question
   validates_length_of :question, :in => 10..50
-  validates_format_of :question, :with => /\A[\w\d\ \?\+]+\z/
+  validates_format_of :question, :with => /\A[\w\d\ \?\+-]+\z/
 
   validates_presence_of :answer
   validates_length_of :answer, :in => 1..20
@@ -15,5 +15,9 @@ class Challenge < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def self.valid?(id)
+    !find(id).nil?
   end
 end

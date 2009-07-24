@@ -21,6 +21,6 @@ class ChallengedSession < ActiveRecord::Base
 
   protected
   def valid_challenge_id
-    errors.add(:challenge_id, 'Invalid challenge ID') if challenge_id > Challenge.count
+    errors.add(:challenge_id, 'Invalid challenge ID') if !challenge_id.nil? and Challenge.valid? challenge_id
   end
 end
