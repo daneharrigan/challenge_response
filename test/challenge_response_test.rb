@@ -86,7 +86,7 @@ class ChallengeResponseTest < ActiveSupport::TestCase
   end
 
   def test_challenge_id_is_invalid
-    challenged_session = ChallengedSession.new({ :challenge_id => 200, :session => @session })
+    challenged_session = ChallengedSession.new({ :challenge_id => (Challenge.find(:last).id+1), :session => @session })
     assert !challenged_session.save
   end
 
@@ -97,8 +97,6 @@ class ChallengeResponseTest < ActiveSupport::TestCase
   def test_create_valid_challenged_session
     challenge = Challenge.new({ :question => 'What does 1 + 1 equal?', :answer => '2' })
     challenge.save
-
-    RAILS_DEFAULT_LOGGER.warn("*** #{@session} ***")
 
     challenged_session = ChallengedSession.new({ :challenge_id => challenge.id, :session => @session })
     assert challenged_session.save
@@ -124,7 +122,7 @@ class ChallengeResponseTest < ActiveSupport::TestCase
   end
 
   def test_challenge_wrong_answer
-    #challenge = Challenge.new({ :question => 'What does 1 + 1 equal?', :answer => '2' })
-    #assert !challenge.answer? '12'
+    challenge = Challenge.new({ :question => 'What does 1 + 1 equal?', :answer => '2' })
+    assert !challenge.answer?('12')
   end
 end

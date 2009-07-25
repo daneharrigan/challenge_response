@@ -18,6 +18,15 @@ class Challenge < ActiveRecord::Base
   end
 
   def self.valid?(id)
-    !find(id).nil?
+    if id.to_s.match /\A[\d]+\z/
+      begin
+        challenge = find(id)
+      rescue
+        challenge = nil
+      end
+      return !challenge.nil?
+    else
+      return false
+    end
   end
 end
