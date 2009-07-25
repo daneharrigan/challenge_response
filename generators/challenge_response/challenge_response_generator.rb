@@ -10,10 +10,7 @@ class ChallengeResponseGenerator < Rails::Generator::Base
 
     # add migration file
     record do |m|
-      if ARGV.first == 'redo'
-        m.file 'challenge_response_migration.rb', "db/migrate/#{timestamp}_challenge_response_migration.rb"
-      end
-
+      m.file 'challenge_response_migration.rb', "db/migrate/#{timestamp}_challenge_response_migration.rb" unless ARGV.first == 'redo'
       m.template 'challenge_questions.rb', "vendor/plugins/challenge_response/challenge_questions.yml"
     end
   end
