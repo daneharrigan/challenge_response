@@ -20,7 +20,13 @@ Instructions
 4. Migrate the database, "rake db:migrate"
 
 5. Add the following to the controller that needs the challenge response:
-  before_filter :challenge_response, :for => [:new, :create]
+
+  class YourController < ApplicationController
+    include ChallengeResponse
+
+    before_filter :challenge_response, :only => [:index, :create]
+    ...
+  end
 
   def create # this code is to be applied to your existing create method
     if params[:form] and challenge_successful?
@@ -40,7 +46,7 @@ The response may be valid, but other areas of the form were not. In a case like 
 6. Add the following to the view. The HTML in this example is hypothetical and should be changed to fit the view properly:
   <div>
     <p><%= challenge_question %></p>
-    <%= challenge_answer %>
+    <%= challenge_answer_tag %>
   </div>
 
 7. Play clean up. Use ChallengedSession.sweep("20min") to remove any unused entries. This can happen if a person views the form and leaves without submitting.

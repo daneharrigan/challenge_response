@@ -5,7 +5,7 @@ class ChallengedSession < ActiveRecord::Base
 
   validates_presence_of :session
   validates_length_of :session, :is => 44
-  validates_format_of :session, :with => /\A[\w\d\+=]+\z/
+  validates_format_of :session, :with => /\A[\w\d\/\+=]+\z/
 
   belongs_to :challenge
 
